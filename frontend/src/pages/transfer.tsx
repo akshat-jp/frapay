@@ -1,13 +1,10 @@
-import Button from "../components/button";
+import axios,{AxiosError} from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import axios,{ AxiosError } from "axios"
-import {  useState } from "react";
-
 
 export function Transfer(){
 
     const navigate = useNavigate();
-    
     const [searchParams] = useSearchParams();
     const [money, setMoney] = useState("");
     const name = searchParams.get("name");
@@ -15,27 +12,40 @@ export function Transfer(){
     const [status, setStatus] = useState("idle"); 
     const [errormsg, setErrorMsg] = useState("");
 
+        useEffect(()=>{
+                const token = localStorage.getItem("token");
+                if(!token){
+                    navigate("/signin")
+                    return;
+                }
+            },[])
 
-    return <div className="h-screen w-screen bg-gray-200 flex items-center justify-center ">
-        <div className="bg-white rounded-[20px] h-[500px] w-[500px] flex flex-col justify-center items-center">
-            <div className="pb-[60px] font-bold text-[35px]">
-                Send Money
+    return (
+    <div className="bg-white md:bg-[#F2D0F4] flex items-center justify-center min-h-screen w-full overflow-x-hidden px-4 py-10">
+
+        {/* WHITE BOX */}
+        <div className="bg-white w-full max-w-[480px] rounded-4xl flex flex-col px-6 sm:px-[35px] py-8 sm:py-[50px] gap-6 sm:gap-8 shadow-sm">
+            
+            <div className="flex flex-col leading-none pb-[20px]">
+                <span className="font-bold text-[36px] sm:text-[50px]">Send!</span>
+                <span className="font-bold pl-[40px] text-[36px] sm:text-[50px] text-[#909090]">Money</span>
             </div>
 
-            <div className="flex flex-col gap-[5px]">
-                <div className="flex items-center gap-[10px] py-[10px]">
-                    <div className="bg-gray-300 rounded-full h-[35px] w-[35px] flex items-center justify-center">{name?.[0].toUpperCase()}</div>
-                    <div className="text-[25px] font-semibold">{name}</div>
+            <div className="flex flex-col  sm:gap-[15px]">
+                <div className="flex flex-col gap-3">
+                    <div className="bg-[#000000] text-white text-[24px] h-[40px] w-[40px] rounded-full flex justify-center ">
+                        {name?.[0].toUpperCase()}
+                    </div>
+                    <span className="font-Manrope text-[17px]">Amount (in Rs)</span>
                 </div>
-
                 <div>
-                    <div className="text-[17px]">Amount (in Rs)</div>
-                    <input onChange={(e)=>{
-                        setMoney(e.target.value);
-                    }} className="border py-[6px] w-[315px] rounded-md px-4 my-[4px]" type="text" id="amount" placeholder="Enter amount"></input>
+                    <input className="border w-full h-[48px] sm:h-[50px] border-gray-300 text-gray-500 pl-[15px] rounded-xl text-[16px] sm:text-[18px]" type="text" placeholder="Enter Amount" onChange={(e)=>{setMoney(e.target.value)}} />
                 </div>
+            </div>
 
-                <Button onClick={async ()=>{
+            <div className="flex flex-col gap-2">
+                <button className="w-full h-[48px] sm:h-[50px] rounded-full text-white font-bold bg-[#272727] hover:bg-[#454545] cursor-pointer text-[16px] sm:text-[18px]" 
+                onClick={async ()=>{
 
                     setStatus("loading")
 
@@ -63,11 +73,12 @@ export function Transfer(){
                     }
 
                 }}
-
+                >
+                    {status === "loading" ? "processing..." : "Initiate Transfer"}
+                </button>
                 
-                text={status === "loading" ? "processing..." : "Initiate Transfer"} ></Button>
 
-                {status === "success" && (
+                 {status === "success" && (
                         <div className="fixed bottom-6 right-6 flex items-center gap-3 px-5 py-4 rounded-xl shadow-lg text-white z-50 bg-green-500">
                             <div>✅</div>
                             <div>
@@ -86,10 +97,9 @@ export function Transfer(){
                             </div>
                         </div>
                     )}
-            
-                
-
             </div>
+
         </div>
     </div>
+);
 }

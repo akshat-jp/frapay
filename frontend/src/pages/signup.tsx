@@ -1,78 +1,71 @@
-import { useState } from "react"
-import { BottomWarning } from "../components/bottomwarning"
-import Button from "../components/button"
-import { Heading } from "../components/heading"
-import { InputBox } from "../components/inputbox"
-import { SubHeading } from "../components/subheading"
-import {Link, useNavigate} from "react-router-dom"
 import axios,{AxiosError} from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Signup(){
+
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [status, setStatus] = useState("idle");
     const [errormsg, setErrorMsg] = useState("");
-    const navigate = useNavigate();
 
-    return <div className="h-screen w-screen bg-gray-200 flex items-center justify-center">
-        <div className="bg-white h-[750px] w-[1200px] rounded-[20px] flex flex-col">
-            <div className="border-b-[1px] border-gray-200 basis-1/12 rounded-t-2xl flex justify-between items-center ">
-                <div className="text-2xl font-bold px-[40px] ">
-                    Paytm
-                </div>
+    return (
+    <div className="bg-white md:bg-[#F2D0F4] flex items-center justify-center min-h-screen w-full overflow-x-hidden px-4 py-10">
 
-                <Link className="mx-[40px] text-lg font-semibold" to={"/signin"}>
-                    Log in
-                </Link>
+        {/* WHITE BOX */}
+        <div className="bg-white w-full max-w-[480px] rounded-4xl flex flex-col px-6 sm:px-[35px] py-8 sm:py-[50px] gap-6 sm:gap-8 shadow-sm">
+            
+            <div className="flex flex-col leading-none">
+                <span className="font-bold text-[36px] sm:text-[45px]">Welcome!</span>
+                <span className="font-bold text-[36px] sm:text-[45px] text-[#909090]">Please Sign Up</span>
             </div>
 
-            <div className=" basis-11/12 rounded-b-2xl flex justify-center ">
-                <div className="w-[400px] flex flex-col justify-center items-center">
-                    <Heading label={"Sign Up"} />
-                    <SubHeading subheading={"Enter your information to create an account"} />
-                    <InputBox onchange={(e : any)=>{
-                        setEmail(e.target.value);
-                    }} text={"Email"} placeholder={"Email address"} />
-                    <InputBox onchange={(e : any)=>{
-                        setPassword(e.target.value);
-                    }} text={"Password"} placeholder={"Password"} />
-                    <InputBox onchange={(e : any)=>{
-                        setFirstname(e.target.value)
-                    }} text={"Firstname"} placeholder={"Firstname"} />
-                    <InputBox onchange={(e : any)=>{
-                        setLastname(e.target.value);
-                    }} text={"Lastname"} placeholder={"Lastname"} />
-                    <Button onClick={async  ()=>{
+            <div className="flex flex-col gap-[12px] sm:gap-[15px]">
+                <input className="border w-full h-[48px] sm:h-[50px] border-gray-300 text-gray-500 pl-[15px] rounded-xl text-[16px] sm:text-[18px]" type="text" placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}} />
+                <input className="border w-full h-[48px] sm:h-[50px] border-gray-300 text-gray-500 pl-[15px] rounded-xl text-[16px] sm:text-[18px]" type="text" placeholder="Firstname" onChange={(e)=>{setFirstname(e.target.value)}} />
+                <input className="border w-full h-[48px] sm:h-[50px] border-gray-300 text-gray-500 pl-[15px] rounded-xl text-[16px] sm:text-[18px]" type="text" placeholder="Lastname" onChange={(e)=>{setLastname(e.target.value)}} />
+                <input className="border w-full h-[48px] sm:h-[50px] border-gray-300 text-gray-500 pl-[15px] rounded-xl text-[16px] sm:text-[18px]" type="password" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}} />
+            </div>
 
-                        setStatus("loading")
+            <div className="flex flex-col gap-2">
+                <button className="w-full h-[48px] sm:h-[50px] rounded-full text-white font-bold bg-[#272727] hover:bg-[#454545] cursor-pointer text-[16px] sm:text-[18px]" 
+                onClick={async ()=>{
 
-                        try{
-                            await axios.post("http://localhost:3000/api/v1/user/signup",{
-                            email,
-                            password,
-                            firstname,
-                            lastname
-                        })
+                    setStatus("loading")
 
-                        setStatus("success")
+                    try{
+                        await axios.post("http://localhost:3000/api/v1/user/signup",{
+                        email,
+                        firstname,
+                        lastname,
+                        password
+                    })
 
-                        setTimeout(() => {
-                            navigate('/signin')
-                        }, 2000);
+                    setStatus("success")
 
+                    setTimeout(() => {
+                        navigate('/signin')
+                    }, 2000);
 
-                        } catch(e){
-                            const error = e as AxiosError<{ msg: string }>;
+                    } catch(e){
+                        const error = e as AxiosError<{ msg: string }>;
 
-                            setStatus("error")
-                            setErrorMsg(error.response?.data?.msg || "Something went wrong");
-                        }
+                        setStatus("error");
+                        setErrorMsg(error.response?.data?.msg || "Something went wrong");
 
-                    }} text={status === "loading" ? "processing..." : "Continue"} />
-                    <BottomWarning text={"Already have an account?"} buttontext={"Signin"} to={"/signin"} />
+                    }
                     
+                }}>
+                    {status === "loading" ? "processing..." : "Submit !"}
+                </button>
+                <div className="flex gap-2 pl-[4px] text-[14px] sm:text-[16px]">
+                    <span>Already an Account?</span>
+                    <span className="underline cursor-pointer hover:text-[#909090]" onClick={() => navigate('/signin')}>Sign In</span>
+                </div>
+
                     {status === "success" && (
                         <div className="fixed bottom-6 right-6 flex items-center gap-3 px-5 py-4 rounded-xl shadow-lg text-white z-50 bg-green-600">
                             <div>✅</div>
@@ -92,9 +85,10 @@ export function Signup(){
                             </div>
                         </div>
                     )}
-                
-                </div>
             </div>
-        </div> 
+
+        </div>
     </div>
+);
 }
+
