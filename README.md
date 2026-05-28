@@ -120,7 +120,7 @@ node index.js
 
 #  How It Works
 
-1. 1. Visit the live site: [Frapay](https://frapay-frontend.vercel.app/) 
+1. Visit the live site: [Frapay](https://frapay-frontend.vercel.app/) 
 2. Create an account
 3. Receive random credits instantly
 4. Search users
