@@ -23,7 +23,7 @@ export function LandingPage(){
                     {/* LEFT PILL */}
                     <div className="bg-[#F1F1F1] flex justify-between items-center gap-4 ml-4 sm:ml-[50px] h-[50px] px-[18px] rounded-4xl">
                         <div className="font-extrabold text-[20px] sm:text-[23px] text-[#272727] cursor-pointer">
-                            PayTm
+                            Frapay
                         </div>
                         <div className="hidden sm:flex gap-5">
                             <div className="font-semibold text-[18px] text-[#272727] cursor-pointer hover:text-[#626262]">Explore</div>
@@ -194,9 +194,9 @@ export function LandingPage(){
 
             {/* FULL BOTTOM DIV */}
             <div className="bg-black pt-[200px] w-screen">
-                <div className="flex flex-col md:flex-row gap-10 md:gap-0  justify-between px-[18px]">
+                <div className="flex flex-col md:flex-row gap-10 md:gap-0  justify-between px-[18px] mx-[18px]">
                     <div className="flex flex-col">
-                        <span className="text-white font-extrabold text-[30px]">PayTm</span>
+                        <span className="text-white font-extrabold text-[30px]">Frapay</span>
                         <span className="text-white font-semibold text-[19px]">Make Payments_Easy</span>
                     </div>
                     <div className="flex gap-8 md:gap-20 lg:gap-63 text-[#545455] font-semibold text-[20px] ">
@@ -221,7 +221,7 @@ export function LandingPage(){
                     </div>
                 </div>
                     
-                <div className="flex flex-col xl:flex-row justify-between px-[18px] pt-[50px]">
+                <div className="flex flex-col xl:flex-row justify-between px-[18px] pt-[50px] mx-[18px]">
                     <div className="text-white flex gap-5 ">
                         <div className="cursor-pointer">
                             <svg width="40px" height="40px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ffffff"><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="#ffffff" stroke-width="1.5"></path><path d="M17.5 6.51L17.51 6.49889" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>    
@@ -242,7 +242,7 @@ export function LandingPage(){
                     <div className="flex  gap-0 lg:gap-39 text-[#545455] font-semibold text-[20px]">
                         <span className="cursor-pointer hover:text-gray-500 pr-[63px]">Privacy Policy</span>
                         <span className="cursor-pointer hover:text-gray-500 pr-[50px]">Terms of Service</span>
-                        <span className="pr-[30px]">2026 PayTm..</span>
+                        <span className="pr-[30px]">2026 Frapay..</span>
                     </div>
                 </div>
 

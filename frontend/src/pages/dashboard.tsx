@@ -118,7 +118,7 @@ export function Dashboard(){
             {/* LEFT */}
             <div className="bg-[#f8f6f4] flex flex-col justify-between py-[30px] px-[32px] pr-[15px] w-[200px] border-r border-dashed border-gray-200 z-10">
                 <div className="font-extrabold text-[32px] cursor-pointer font-Manrope">
-                    PayTm
+                    Frapay
                 </div>
                 <div>
                     <div className="flex gap-2 cursor-pointer hover:bg-[#EFEFEF] px-[15px] py-[8px] rounded-lg pr-[35px] text-gray-600" >
